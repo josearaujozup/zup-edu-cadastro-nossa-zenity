@@ -1,9 +1,16 @@
 package br.com.zup.edu.nossozenity.zupper;
 
-import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Zupper {
@@ -58,5 +65,37 @@ public class Zupper {
 
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
-	}    
+	}
+
+
+	public String getNome() {
+		return nome;
+	}
+
+
+	public String getCargo() {
+		return cargo;
+	}
+
+
+	public List<Certificado> getCertificados() {
+		return certificados;
+	}
+
+
+	public List<Kudo> getKudosRecebidos() {
+		return kudosRecebidos;
+	}
+	
+	
+	public List<Habilidade> getHabilidades() {
+		return habilidades;
+	}
+	
+	
+	public String getTempoCasa() {
+		Period periodo = Period.between(dataAdmissao, LocalDate.now());
+		return "Anos: " + periodo.getYears();
+	}
+	
 }

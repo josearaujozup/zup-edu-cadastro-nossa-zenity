@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,6 +36,16 @@ public class ZupperController {
 		repository.save(zupper);
 		
 		return ResponseEntity.noContent().build();
+	}
+	
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<ZupperResponseDTO> detalhar(@PathVariable("id") Long idZupper){
+		
+		Zupper zupper = repository.findById(idZupper).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Artista não encontrada"));
+		
+		return ResponseEntity.ok(new ZupperResponseDTO(zupper));
+		
 	}
 	
 }
