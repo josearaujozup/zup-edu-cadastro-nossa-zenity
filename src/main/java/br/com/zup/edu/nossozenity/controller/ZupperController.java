@@ -1,5 +1,8 @@
 package br.com.zup.edu.nossozenity.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.com.zup.edu.nossozenity.repository.ZupperRepository;
+import br.com.zup.edu.nossozenity.zupper.Habilidade;
 import br.com.zup.edu.nossozenity.zupper.Zupper;
 
 @RestController
@@ -46,6 +50,19 @@ public class ZupperController {
 		
 		return ResponseEntity.ok(new ZupperResponseDTO(zupper));
 		
+	}
+	
+	
+	@GetMapping("/{id}/habilidades")
+	public ResponseEntity<?> listarHabilidades(@PathVariable("id") Long idZupper){
+		
+		Zupper zupper = repository.findById(idZupper).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Artista não encontrada"));
+		
+		List<Habilidade> habilidades = zupper.getHabilidades();
+		
+		List<HabilidadeResponse> response = habilidades.stream().map(HabilidadeResponse::new).collect(Collectors.toList());
+		
+		return ResponseEntity.ok(response);
 	}
 	
 }
