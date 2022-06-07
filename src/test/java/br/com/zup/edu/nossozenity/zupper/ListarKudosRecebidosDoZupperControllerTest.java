@@ -81,6 +81,16 @@ class ListarKudosRecebidosDoZupperControllerTest {
         assertEquals(2,kudos.size());
         assertEquals(agradecimento.getNome().name().toLowerCase(),kudos.get(0).getNome());
         assertEquals(trabalhoEmEquipe.getNome().name().toLowerCase(),kudos.get(1).getNome());
+
+        //implementação resposta do especialista
+//        assertThat(response)
+//                .hasSize(2)
+//                .extracting("nome", "enviadoPor")
+//                .contains(
+//                        new Tuple(TipoKudo.ALEM_DAS_EXPECTATIVAS.name().toLowerCase(Locale.ROOT), jordi.getNome()),
+//                        new Tuple(TipoKudo.EXCELENTE_MENTOR.name().toLowerCase(Locale.ROOT), jordi.getNome())
+//                );
+
     }
 
     @Test
